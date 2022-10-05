@@ -2,6 +2,7 @@
 Class members:
  i. attribute/state/data/field -> static properties
     iban, balance, status
+    property
 ii. behaviour/method           -> dynamic properties
 """
 from enum import Enum
@@ -28,9 +29,28 @@ class InsufficientBalanceError(Exception):
 class Account:
 
     def __init__(self, iban, balance=0.0, status=AccountStatus.ACTIVE):
-        self.iban = iban
-        self.balance = balance
-        self.status = status
+        self._iban = iban
+        self._balance = balance
+        self._status = status
+
+    @property
+    def balance(self):
+        return self._balance
+
+    @property
+    def iban(self):
+        return self._iban
+
+    @property
+    def status(self):
+        return self._status
+
+    @status.setter
+    def status(self, status):
+        print("@status.setter status(self, status)")
+        if self._status == AccountStatus.CLOSED:
+            raise ValueError("Cannot change status for a CLOSED account.")
+        self._status = status
 
     def deposit(self, amount=5.0):
         if amount <= 0:
@@ -51,14 +71,15 @@ class Account:
         self.balance = self.balance - amount
         return self.balance
 
+
 try:
     account1 = Account("tr1")
     account2 = Account("tr2", 10000)
-    account3 = Account("tr3", 20000, AccountStatus.ACTIVE)
+    account3 = Account("tr3", 20000, AccountStatus.CLOSED)
+    account3.status = AccountStatus.BLOCKED
     account1.deposit(100.0)
     account1.deposit(1.0)
-    account1.withdraw(101.0)
-    print(account1)
+    print(account1.balance)
 except ValueError as err:
     print(err)
 except InsufficientBalanceError as err:
