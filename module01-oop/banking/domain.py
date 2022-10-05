@@ -75,6 +75,10 @@ class Account:
     def __str__(self):
         return f"Account [iban: {self.iban}, balance: {self.balance}, status: {self.status}]"
 
+    # static method -> stateless
+    def fun(x):
+        return 2 * x + 1
+
 
 """
 Account         -> base   /super/parent class
@@ -83,7 +87,7 @@ CheckingAccount -> derived/sub  /child   class
 
 
 class CheckingAccount(Account):
-    def __init__(self, iban, balance, status, overdraft_amount):
+    def __init__(self, iban, balance=0.0, status=AccountStatus.ACTIVE, overdraft_amount=100):
         super().__init__(iban, balance, status)
         self._overdraft_amount = overdraft_amount
 
