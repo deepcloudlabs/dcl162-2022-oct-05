@@ -4,10 +4,11 @@ from world.domain import Country
 
 
 class CountryHandler(xml.sax.ContentHandler):
-    def __init__(self):
+    def __init__(self, predicate_fun):
         self.countries = []
         self.country = Country()
         self.open_tag = ""
+        self.predicate_fun = predicate_fun
         self.property_tag_names = {
             "Code": "code",
             "Name": "name",
@@ -27,12 +28,13 @@ class CountryHandler(xml.sax.ContentHandler):
     def endElement(self, tag):
         self.open_tag = ""
         if tag == "country":
-            self.countries.append(self.country)
-            self.country = Country()
+            if self.predicate_fun(self.country):
+                self.countries.append(self.country)
+                self.country = Country()
 
 
 parser = xml.sax.make_parser()
-handler = CountryHandler()
+handler = CountryHandler(lambda country: country.population == 0)
 parser.setContentHandler(handler)
 parser.parse("resources/countries.xml")
 for country in handler.countries:
