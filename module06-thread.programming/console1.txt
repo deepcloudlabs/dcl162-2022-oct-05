@@ -1,0 +1,7 @@
+
+b'{"symbol":"LTCBTC","price":"0.00270300"}'
+b'{"symbol":"BNBBTC","price":"0.01459100"}'
+b'{"symbol":"NEOBTC","price":"0.00043400"}'
+b'{"symbol":"BTCUSDT","price":"20212.21000000"}'
+b'{"symbol":"ETHUSDT","price":"1369.50000000"}'
+2.87 seconds
