@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>HR App</title>
-    <style type="text/css">
+    <style>
         @import "css/bootstrap.css";
         @import "css/bootstrap-theme.css";
         @import "css/toastr.css";
@@ -24,7 +24,7 @@
     <script type="application/javascript" src="js/app.js"></script>
 </head>
 <body>
-<p />
+<p></p>
 <div class="container">
     <div class="panel panel-primary">
         <div class="panel-heading">
@@ -51,47 +51,47 @@
                 <input type="text"
                        data-bind="textInput: employee.identity"
                        class="form-control"
-                       id="identityNo" />
+                       id="identityNo"/>
             </div>
             <div class="form-group">
-                <label for="fullname"data-i18n="labelFullName">Full Name</label>
+                <label for="fullname" data-i18n="labelFullName">Full Name</label>
                 <input type="text"
                        data-bind="value: employee.fullname"
                        class="form-control"
-                       id="fullname" />
+                       id="fullname"/>
             </div>
             <div class="form-group">
                 <label for="iban" data-i18n="labelIban">IBAN</label>
                 <input type="text"
                        data-bind="value: employee.iban"
                        class="form-control"
-                       id="iban" />
+                       id="iban"/>
             </div>
             <div class="form-group">
                 <label for="salary" data-i18n="labelSalary">Salary</label>
                 <input type="number"
                        data-bind="value: employee.salary"
                        class="form-control"
-                       id="salary" />
+                       id="salary"/>
             </div>
             <div class="form-group">
                 <label for="birthYear" data-i18n="labelBirthYear">Birth Year</label>
                 <input type="number"
                        data-bind="value: employee.birthYear"
                        class="form-control"
-                       id="birthYear" />
+                       id="birthYear"/>
             </div>
             <div class="form-group">
                 <label class="form-check-label" for="fulltime" data-i18n="labelFulltime">Full Time</label>
                 <input type="checkbox"
                        data-bind="checked: employee.fulltime"
                        class="form-check-input"
-                       id="fulltime" />
+                       id="fulltime"/>
             </div>
             <div class="form-group">
                 <label for="department" data-i18n="labelDepartment">Department</label>
                 <select class="form-control"
-                       data-bind="value: employee.department"
+                        data-bind="value: employee.department"
                         id="department">
                     <option>IT</option>
                     <option>SALES</option>
@@ -103,33 +103,40 @@
             <div class="form-group">
                 <label for="photo" data-i18n="labelPhoto">Photo</label>
                 <img class="img-thumbnail"
+                     src=""
+                     alt=""
                      style="width: 64px; height: 64px;"
                      data-bind="attr: { src: fileData().dataUrl }">
-                <label class="btn btn-info btn-file" >
+                <label class="btn btn-info btn-file">
                     <input id="photo"
                            data-bind="fileInput: fileData"
                            type="file" style="display: none;"/>
                     <span data-i18n="buttonBrowse">Browse</span>
                 </label>
-                <p/>
-                <div class="drop-zone" type="text"
+                <p></p>
+                <div class="drop-zone"
                      data-bind="event: { drop: function (data,e) { $root.insertFile(e,data);},
 	    			     dragover: function(data,e){ $root.dragover(e);}	}"
-                     id="filedrag">Drop image here!</div>
+                     id="filedrag">Drop image here!
+                </div>
             </div>
             <div class="form-group">
                 <button class="btn btn-success"
                         data-i18n="buttonAdd"
-                        data-bind="click: createEmployee,enable: employee.isEmployeeValid()">Add</button>
+                        data-bind="click: createEmployee,enable: employee.isEmployeeValid()">Add
+                </button>
                 <button class="btn btn-info"
                         data-i18n="buttonFind"
-                        data-bind="click: findEmployeeByIdentity, enable: employee.identity.isValid()">Find</button>
+                        data-bind="click: findEmployeeByIdentity, enable: employee.identity.isValid()">Find
+                </button>
                 <button class="btn btn-warning"
                         data-i18n="buttonUpdate"
-                        data-bind="click: updateEmployee, enable: employee.isEmployeeValid()">Update</button>
+                        data-bind="click: updateEmployee, enable: employee.isEmployeeValid()">Update
+                </button>
                 <button class="btn btn-success"
                         data-i18n="buttonFindAll"
-                        data-bind="click: findAllEmployees">Find All</button>
+                        data-bind="click: findAllEmployees">Find All
+                </button>
             </div>
         </div>
     </div>
@@ -156,15 +163,20 @@
                 <tr>
                     <td data-bind="text: $index() +1"></td>
                     <td><img data-bind="attr: {src: photo}"
-                            style="width: 64px; height: 64px;"/></td>
+                             alt=""
+                             src=""
+                             style="width: 64px; height: 64px;"/></td>
                     <td data-bind="text: identity"></td>
                     <td data-bind="text: fullname"></td>
                     <td data-bind="text: salary"></td>
                     <td data-bind="text: iban"></td>
-                    <td><h6></h6><span class="badge bg-success" data-bind="text: department"></span></h6></td>
-                    <td><span class="badge" data-bind="text: fulltime? 'FULL-TIME': 'PART-TIME'"></td>
-                    <td><button class="btn btn-danger"
-                                data-bind="click: $root.removeEmployee" data-i18n="buttonDelete">Delete</button></td>
+                    <td><h6><span class="badge bg-success" data-bind="text: department"></span></h6></td>
+                    <td><span class="badge" data-bind="text: fulltime ? 'FULL-TIME': 'PART-TIME'"></span></td>
+                    <td>
+                        <button class="btn btn-danger"
+                                data-bind="click: $root.removeEmployee" data-i18n="buttonDelete">Delete
+                        </button>
+                    </td>
                 </tr>
                 </tbody>
             </table>
